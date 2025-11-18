@@ -42,7 +42,6 @@ document.addEventListener("DOMContentLoaded", () => {
           _idx: i,
           Familia: r.c[0]?.v || "General",
           Nombre: r.c[1]?.v || "Producto",
-          SubFamilia: r.c[2]?.v || "",
           Tester30: r.c[3]?.v || "",
           Tester90: r.c[4]?.v || ""
         }));
@@ -87,18 +86,18 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="product-title">${p.Nombre}</div>
 
           <div class="quantity-controls">
-            <input type="number" min="0" value="0" class="mainQty" data-idx="${p._idx}">
+            <input type="number" min="" value="" class="mainQty" data-idx="${p._idx}">
           </div>
 
           ${showTesters ? `
             <div class="tester-row">
               <label>Tester 30ml</label>
-              <input type="number" min="0" value="0" class="tester30" data-idx="${p._idx}">
+              <input type="number" min="" value="" class="tester30" data-idx="${p._idx}">
             </div>
 
             <div class="tester-row">
               <label>Tester 90ml</label>
-              <input type="number" min="0" value="0" class="tester90" data-idx="${p._idx}">
+              <input type="number" min="" value="" class="tester90" data-idx="${p._idx}">
             </div>
           ` : ""}
         `;
