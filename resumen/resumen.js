@@ -4,6 +4,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const statusEl = document.getElementById("status");
   const MIN_UNIDADES = 40;
 
+  // Ahora cada item puede tener:
+  // Nombre, Cantidad, Tester30, Tester90, Cont
   const data = JSON.parse(sessionStorage.getItem("pedidoGlobal") || "[]");
 
   if (data.length === 0) {
@@ -19,11 +21,23 @@ document.addEventListener("DOMContentLoaded", () => {
   data.forEach(it => {
     totalUnidades += Number(it.Cantidad);
 
+    const tester30 = Number(it.Tester30 || 0);
+    const tester90 = Number(it.Tester90 || 0);
+
     const div = document.createElement("div");
     div.className = "summary-item";
+
+    let testerHTML = "";
+
+    if (tester30 > 0) testerHTML += `<br><small>Tester 30ml: ${tester30}</small>`;
+    if (tester90 > 0) testerHTML += `<br><small>Tester 90ml: ${tester90}</small>`;
+
     div.innerHTML = `
       <span><strong>${it.Nombre}</strong> (${it.Cont})</span>
-      <span>${it.Cantidad} unidades</span>
+      <span>
+        ${it.Cantidad} unidades
+        ${testerHTML}
+      </span>
     `;
     container.appendChild(div);
   });
@@ -62,34 +76,36 @@ document.addEventListener("DOMContentLoaded", () => {
     const email = document.getElementById("client_email").value.trim();
     const obs = document.getElementById("obs")?.value || "";
 
-
     if (!name || !address || !phone) {
       statusEl.textContent = "⚠️ Completá nombre, dirección y teléfono.";
       return;
     }
 
+    // 🆕 Pedido con tester incluido
     const pedidoTexto =
-      data.map(it => `${it.Nombre} (${it.Cont}) — ${it.Cantidad} unidades`).join("\n");
+      data.map(it => {
+        let base = `${it.Nombre} (${it.Cont}) — ${it.Cantidad} unidades`;
 
-const body = {
-  proyecto: "ACTIVE COSMETIC",
-  name,
-  address,
-  phone,
-  email,
-  total_unidades: totalUnidades,
-  pedido: pedidoTexto,
-  comentarios: obs,
+        if (it.Tester30 > 0) base += ` — Tester 30ml: ${it.Tester30}`;
+        if (it.Tester90 > 0) base += ` — Tester 90ml: ${it.Tester90}`;
 
-  // 🆕 Subject limpio con prefijo + nombre del cliente
-  _subject: `Pedido recibido – ${name}`,
+        return base;
+      }).join("\n");
 
-  // Copia al cliente
-  _cc: email
-};
+    const body = {
+      proyecto: "ACTIVE COSMETIC",
+      name,
+      address,
+      phone,
+      email,
+      total_unidades: totalUnidades,
+      pedido: pedidoTexto,
+      comentarios: obs,
 
+      _subject: `Pedido recibido – ${name}`,
+      _cc: email
+    };
 
- 
     statusEl.textContent = "📨 Enviando pedido...";
 
     try {
@@ -102,8 +118,6 @@ const body = {
       if (res.ok) {
         statusEl.textContent = "✅ Pedido enviado correctamente.";
         showAlert("Pedido enviado correctamente ✔", true);
-
-        // IMPORTANTE → borrar pedido al enviar
         sessionStorage.removeItem("pedidoGlobal");
       } else {
         showAlert("Error al enviar el pedido ❌", false);
@@ -116,9 +130,8 @@ const body = {
     }
   });
 
-
   // =====================================================
-  // 📄 DESCARGAR PDF PROFESIONAL (CON LOGO + ENCABEZADO)
+  // 📄 PDF (se mantiene igual)
   // =====================================================
   document.getElementById("downloadPdfBtn").addEventListener("click", async () => {
 
@@ -133,11 +146,9 @@ const body = {
 
       const total = data.reduce((s, it) => s + Number(it.Cantidad), 0);
 
-      // Fecha & hora
       const fecha = new Date().toLocaleDateString();
       const hora = new Date().toLocaleTimeString();
 
-      // Cargar logo
       try {
           const logo = await fetch("../logos/activelogo.png")
               .then(res => res.blob())
@@ -148,13 +159,10 @@ const body = {
               }));
 
           doc.addImage(logo, "PNG", 10, 10, 45, 25);
-      } catch (e) {
-          console.warn("⚠ No se pudo cargar el logo en PDF.");
-      }
+      } catch (e) {}
 
       let y = 45;
 
-      // Encabezado
       doc.setFont("helvetica", "bold");
       doc.setFontSize(20);
       doc.text("Resumen de pedido", 10, y);
@@ -165,18 +173,15 @@ const body = {
       doc.text(`Fecha: ${fecha}   -   Hora: ${hora}`, 10, y);
       y += 8;
 
-      // Línea divisoria
       doc.setLineWidth(0.4);
       doc.line(10, y, 200, y);
       y += 12;
 
-      // Título lista
       doc.setFont("helvetica", "bold");
       doc.setFontSize(14);
       doc.text("Productos seleccionados:", 10, y);
       y += 10;
 
-      // Items
       doc.setFont("helvetica", "normal");
       doc.setFontSize(12);
 
@@ -187,9 +192,19 @@ const body = {
           doc.text(`  Presentación: ${it.Cont}`, 12, y);
           y += 6;
           doc.text(`  Cantidad: ${it.Cantidad} unidades`, 12, y);
-          y += 8;
+          y += 6;
 
-          // Línea separadora
+          if (it.Tester30 > 0) {
+            doc.text(`  Tester 30ml: ${it.Tester30}`, 12, y);
+            y += 6;
+          }
+
+          if (it.Tester90 > 0) {
+            doc.text(`  Tester 90ml: ${it.Tester90}`, 12, y);
+            y += 6;
+          }
+
+          y += 4;
           doc.setDrawColor(180);
           doc.setLineWidth(0.2);
           doc.line(10, y, 200, y);
@@ -201,7 +216,6 @@ const body = {
           }
       });
 
-      // TOTAL
       y += 8;
       doc.setFont("helvetica", "bold");
       doc.setFontSize(15);
@@ -211,7 +225,6 @@ const body = {
   });
 
 });
-
 
 // ============================
 // 🔔 ALERTA VISUAL GLOBAL
