@@ -1,0 +1,210 @@
+/* Estilo minimalista blanco */
+:root{
+  --bg:#ffffff;
+  --card:#fbfbfb;
+  --muted:#666;
+  --accent:#0b5fff;
+  --border:#eee;
+}
+*{box-sizing:border-box;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial;}
+body{background:var(--bg);color:#111;margin:0;padding:32px;display:flex;justify-content:center;}
+.container{width:100%;max-width:900px;background:var(--card);padding:28px;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,0.04);border:1px solid var(--border);}
+h1{margin:0 0 8px;font-size:24px;}
+.subtitle{margin:0 0 18px;color:var(--muted);}
+.group{margin-bottom:18px;}
+.group h2{margin:0 0 12px;font-size:16px;color:#222;border-bottom:1px solid var(--border);padding-bottom:8px;}
+.product{display:grid;grid-template-columns:1fr 100px 90px 120px;gap:12px;align-items:center;padding:10px;border-radius:8px;border:1px solid var(--border);margin-bottom:8px;background:white;}
+.product .name{font-weight:600;}
+.product .cont{color:var(--muted);font-size:13px;}
+.price{font-weight:700;text-align:right;}
+.qty input{width:72px;padding:6px;border-radius:6px;border:1px solid var(--border);text-align:center;}
+.actions{display:flex;gap:12px;align-items:center;margin-top:18px;flex-wrap:wrap;}
+.actions input{padding:8px;border-radius:8px;border:1px solid var(--border);min-width:220px;}
+#sendBtn{background:var(--accent);color:white;padding:10px 16px;border-radius:10px;border:0;cursor:pointer;}
+.status{margin-top:14px;color:var(--muted);}
+.foot{margin-top:18px;font-size:13px;color:var(--muted);}
+@media(max-width:700px){
+  .product{grid-template-columns:1fr 90px 80px 100px;}
+}
+.floating-cart {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--accent);
+  color: white;
+  font-size: 24px;
+  text-decoration: none;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: background 0.2s, transform 0.2s;
+  z-index: 999;
+}
+.floating-cart:hover {
+  background: #084bcc;
+  transform: scale(1.1);
+}
+/* --- Botón flotante del pedido global --- */
+.floating-cart {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--accent);
+  color: white;
+  font-size: 26px;
+  text-decoration: none;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+  transition: background 0.2s, transform 0.2s;
+  z-index: 1000;
+}
+.floating-cart:hover {
+  background: #084bcc;
+  transform: scale(1.1);
+}
+
+/* Contador dentro del botón */
+#cart-count {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #ff4d4d;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 10px;
+  padding: 2px 6px;
+  line-height: 1;
+}
+
+/* Leyenda al lado del botón */
+.floating-label {
+  position: fixed;
+  bottom: 38px;
+  right: 95px;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(10px);
+  transition: opacity 0.25s, transform 0.25s;
+  z-index: 999;
+}
+.floating-cart:hover + .floating-label {
+  opacity: 1;
+  transform: translateX(0);
+}
+/* ---------- BANNERS DINÁMICOS ---------- */
+
+.banners {
+  width: 100%;
+  max-width: 2300px;
+  margin: 30px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.banner {
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  transition: transform .25s, box-shadow .25s;
+}
+
+.banner:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 25px rgba(0,0,0,0.12);
+}
+
+.banner img,
+.banner-item img {
+  width: 100% !important;
+  height: auto !important;
+  max-width: 1400px !important; /* Ajusta a gusto 900 / 1200 / 1600 */
+  object-fit: contain !important;
+  display: block;
+}
+
+
+.banner div {
+  padding: 12px;
+  font-size: 15px;
+  color: #333;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .banner img {
+    height: 160px;
+  }
+}
+.banners-container {
+    width: 100%;
+    max-width: 1100px;   /* para que no se vayan demasiado grandes */
+    margin: 40px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+}
+
+.banner-item img {
+    width: 100%;
+    max-width: 1000px;   /* ajustá a gusto (800px, 1200px, etc) */
+    height: auto;
+    border-radius: 10px;
+    display: block;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+/* FORZAR TAMAÑO REAL DE LOS BANNERS NUEVOS */
+.banners-container {
+    width: 100%;
+    max-width: 1300px !important;
+    margin: 40px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+}
+
+.banner-item img {
+    width: 100% !important;
+    max-width: 900px !important; /* ajusta a gusto */
+    height: auto !important;
+    object-fit: contain !important; /* evita recortes */
+}
+/* --- OVERRIDE FINAL PARA BANNERS GRANDES --- */
+.banners-container {
+  width: 100% !important;
+  max-width: 900px !important; /* Cambia a 1200, 1400, 1600 según prefieras */
+  margin: 40px auto !important;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+}
+
+.banner-item img {
+  width: 100% !important;
+  max-width: 900px !important; /* tamaño real máximo */
+  height: auto !important;
+  object-fit: contain !important;
+  border-radius: 16px;
+  box-shadow: 0 6px 22px rgba(0,0,0,0.15);
+}
+

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido ACTIVE COSMETIC</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- XLSX -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+</head>
+
+<body>
+
+    <!-- 🔥 BARRA DE MINIMO (funciona con tu CSS original) -->
+    <div id="min-bar-wrapper">
+        <div id="min-bar"></div>
+    </div>
+    <div id="min-bar-text">Cargando...</div>
+
+    <div class="main-container">
+
+        <!-- Logo y título -->
+        <div class="brand-header">
+            <img class="brand-activelogo" src="../logos/activelogo.png" alt="ACTIVE COSMETIC">
+            <h1>Pedido online</h1>
+        </div>
+
+        <!-- Links superiores -->
+        <div class="top-links">
+            <a href="../catalogo.pdf" target="_blank">📘 Ver catálogo completo (PDF)</a> |
+            <a href="../index.html">⬅ Volver al inicio</a> |
+            <a href="../resumen/index.html">📄 Ver resumen del pedido</a>
+        </div>
+
+        <!-- Texto -->
+        <p class="intro-text">Seleccione los productos deseados.</p>
+
+
+        <!-- Contenedor REAL de productos (NO cambiar nombre) -->
+        <div id="products"></div>
+
+        <div class="foot">Formulario de pedidos ACTIVE COSMETIC</div>
+
+    </div>
+
+    <!-- 🔥 BOTÓN FLOTANTE SCROLL -->
+    <a href="../resumen/index.html" id="goSummaryBtn" class="go-summary-btn">
+        Ir al resumen
+    </a>
+
+    <!-- Script original -->
+    <script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Resumen del Pedido - ACTIVE COSMETIC</title>
+
+  <link rel="stylesheet" href="resumen.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <style>
+    .brand-activelogo {
+      display: block;
+      margin: 0 auto 20px;
+      width: 160px;
+      height: auto;
+    }
+    .brand-header {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+  </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+</head>
+
+<body>
+<div id="alertBox" class="alert-box">
+  <div id="alertContent"></div>
+</div>
+
+  <main class="container">
+
+    <div class="brand-header">
+      <img src="../logos/activelogo.png" alt="ACTIVE COSMETIC" class="brand-activelogo" />
+      <h1>🧾 Resumen del Pedido</h1>
+    </div>
+
+    <p class="subtitle">
+      Revise todos los productos seleccionados antes de enviar su pedido.
+    </p>
+
+    <section id="order-summary" class="summary"></section>
+
+    <div class="client-info">
+      <h2>Datos del cliente</h2>
+
+      <label for="client_name">Razon social</label>
+      <input id="client_name" type="text" placeholder="Razon social" required />
+
+      <label for="client_address">Dirección</label>
+      <input id="client_address" type="text" placeholder="Calle, número, localidad" required />
+
+      <label for="client_phone">Teléfono de contacto</label>
+      <input id="client_phone" type="text" placeholder="Ej: 11 2345-6789" required />
+
+      <label for="client_email">Email (opcional)</label>
+      <input id="client_email" type="email" placeholder="cliente@ejemplo.com" />
+    
+      <label for="client_obs">Observaciones / Comentarios (opcional)</label>
+      <input id="obs" type="text" placeholder="Comentarios" />
+    </div>
+
+    <div class="actions">
+      <a href="../productos/index.html" class="back-big-btn">⬅ Volver al pedido</a>
+      <button id="sendBtn" class="back-big-btn">📤 Enviar pedido</button>
+      <button id="downloadPdfBtn" class="back-big-btn" style="margin-top:15px;">
+    Descargar pedido en PDF
+</button>
+
+    </div>
+
+    <div id="status" class="status" aria-live="polite"></div>
+  </main>
+
+  <script src="resumen.js"></script>
+</body>
+</html>

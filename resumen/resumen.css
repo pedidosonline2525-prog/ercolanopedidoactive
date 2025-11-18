@@ -1,0 +1,140 @@
+body {
+  font-family: Inter, system-ui, sans-serif;
+  background: #f5f7fa;
+  color: #222;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  background: #fff;
+  padding: 24px;
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+/* ===== TÍTULOS ===== */
+h1 {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.subtitle {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #666;
+}
+
+/* ===== RESUMEN DE PRODUCTOS ===== */
+.summary {
+  background: #fafafa;
+  padding: 18px;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  border: 1px solid #eee;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.summary-item:last-child {
+  border-bottom: none;
+}
+
+/* ===== DATOS DEL CLIENTE ===== */
+.client-info {
+  margin-bottom: 25px;
+}
+
+.client-info label {
+  display: block;
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+.client-info input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  margin-top: 4px;
+}
+
+/* ===== BOTONES ===== */
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn {
+  background: #111;
+  color: white;
+  padding: 14px 18px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+}
+
+.btn.back {
+  background: #777;
+}
+
+#sendBtn {
+  border: none;
+}
+
+.status {
+  margin-top: 10px;
+  color: #0a0;
+  font-weight: 600;
+  text-align: center;
+}
+.back-big-btn {
+    display: block;
+    text-align: center;
+    background: #111;
+    color: #fff;
+    padding: 14px 0;
+    margin: 25px 0;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
+    transition: background .25s, transform .2s;
+}
+
+.back-big-btn:hover {
+    background: #333;
+    transform: translateY(-2px);
+}
+.alert-box {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #111;
+    color: white;
+    padding: 18px 20px;
+    border-radius: 10px;
+    box-shadow: 0px 6px 14px rgba(0,0,0,0.25);
+    font-size: 16px;
+    font-weight: 600;
+    z-index: 999999;
+    display: none;
+    opacity: 0;
+    transition: opacity .3s ease, transform .3s ease;
+}
+
+.alert-box.show {
+    display: block;
+    opacity: 1;
+}
