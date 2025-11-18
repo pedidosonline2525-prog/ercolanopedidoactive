@@ -81,9 +81,13 @@ const body = {
   pedido: pedidoTexto,
   comentarios: obs,
 
-  // 🔥 COPIA AL CLIENTE → Formspree enviará el mismo mail al cliente
+  // 🆕 Subject limpio con prefijo + nombre del cliente
+  _subject: `Pedido recibido – ${name}`,
+
+  // Copia al cliente
   _cc: email
 };
+
 
  
     statusEl.textContent = "📨 Enviando pedido...";
