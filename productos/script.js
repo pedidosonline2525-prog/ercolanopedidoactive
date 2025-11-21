@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const DOCUMENT_ID = "1Q2V_gkxmSpZWAEIsfRNsuh_LQsgP5uUAKREQGmiDivI";
-  const GID = "113327199";
+  const GID = "1348849928";
   const MIN_UNIDADES = 40;
 
   const URL = `https://docs.google.com/spreadsheets/d/${DOCUMENT_ID}/gviz/tq?tqx=out:json&gid=${GID}`;
