@@ -1,11 +1,7 @@
 // =====================================================
-// 🔐 FIX PARA CELULARES — BORRAR PEDIDO AL CERRAR APP
+// 🔐 FIX — BORRAR PEDIDO SOLO AL CERRAR PESTAÑA / NAVEGADOR
 // =====================================================
-if (!sessionStorage.getItem("active_session")) {
-    // Nueva sesión real → borrar pedido guardado
-    sessionStorage.clear();
-}
-// Registrar sesión activa
+// Ya no detectamos multitarea. Solo marcamos la sesión como activa.
 sessionStorage.setItem("active_session", "1");
 
 
