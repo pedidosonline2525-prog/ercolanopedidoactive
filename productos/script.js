@@ -1,3 +1,17 @@
+// =====================================================
+// 🔐 FIX PARA CELULARES — BORRAR PEDIDO AL CERRAR APP
+// =====================================================
+if (!sessionStorage.getItem("active_session")) {
+    // Nueva sesión real → borrar pedido guardado
+    sessionStorage.clear();
+}
+// Registrar sesión activa
+sessionStorage.setItem("active_session", "1");
+
+
+// =====================================================
+// Tu código original arranca acá
+// =====================================================
 document.addEventListener("DOMContentLoaded", () => {
   const DOCUMENT_ID = "1Q2V_gkxmSpZWAEIsfRNsuh_LQsgP5uUAKREQGmiDivI";
   const GID = "1348849928";
@@ -193,7 +207,6 @@ document.addEventListener("DOMContentLoaded", () => {
     goSummaryBtn.addEventListener("click", e => {
       const saved = JSON.parse(sessionStorage.getItem("pedidoGlobal") || "[]");
 
-      // ✅ Ahora NO suma testers
       const total = saved.reduce(
         (s, it) => s + Number(it.Cantidad || 0),
         0
